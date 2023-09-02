@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+{% block title %}Search{% endblock title %}
+{% block product_content %}
+{% if p %}
+{% for i in p %}
+<div class="container">
+<!--    product detail starts here-->
+           <div class="row">
+               	<div class="col-lg-4 col-md-6 text-center">
+						<div class="single-product-item">
+                             <div class="product-image">
+                                    <img src="{{i.image.url}}">
+                             </div>
+                                    <h3>{{i.name}}</h3>
+                                    <h4>{{i.price}}</h4>
+                                    <h5>{{i.description}}</h5>
+                                   <a href="{% url 'cartpage' %}"><button style="font-size:24px; background-color:yellow; color:white;">Add to Cart <i class="fa fa-shopping-cart"></i></button></a>   </div>
+               </div>
+           </div>
+</div>
+
+{% endfor %}
+{% else %}
+    <h2 style="color:red;">No results found.......!!</h2>
+{% endif %}
+
+{% endblock %}

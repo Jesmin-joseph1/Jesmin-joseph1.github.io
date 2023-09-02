@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+{% block title %}Categories{% endblock title %}
+
+{% block product_content %}
+
+<div class="row">
+<!--Product view starts here-->
+				{% for c in cats %}
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="{% url 'productviewpage' c.name %}">
+							<img src="{{c.image.url}}" style="height:250px;" alt=""></a>
+						</div>
+						<h3>{{c.name}}</h3>
+						</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- end product section -->
+	{% endblock %}

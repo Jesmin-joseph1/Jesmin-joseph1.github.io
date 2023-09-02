@@ -1,0 +1,52 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}Shop{% endblock title %}
+
+	{% block product_content %}
+	<!-- product section -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Our</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+<!--				Product view starts here-->
+				{% for p in post %}
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="{% url 'productdetailpage' p.name %}">
+							<img src="{{p.image.url}}" style="height:250px;" alt="">
+						</div>
+						     <h3>{{p.name}}</h3>
+						     <p class="product"><span></span>Rs {{p.price}}</p>
+						     </a>
+						<a href="{% url 'addcart' p.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- end product section -->
+<div>
+	<nav aria-label="Page navigation example">
+  		<ul class="pagination">
+      		{% if post.has_previous %}
+         		<li class="page-item"><a class="page-link" href="?page={{post.previous_page_number}}">Previous</a></li>
+      		{% endif %}
+      		{% for i in total %}
+         		<li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+      		{% endfor %}
+      		{% if post.has_next %}
+         		<li class="page-item"><a class="page-link" href="?page={{post.next_page_number}}">Next</a></li>
+      		{% endif %}
+   		</ul>
+	</nav>
+</div>
+	{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{% static 'lib/slick/slick.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/slick/slick-theme.css' %}" rel="stylesheet">
+{% block title %}Categories{% endblock title %}
+
+
+{% block product_content %}
+
+       <!-- Checkout Start -->
+        <div class="checkout">
+            <div class="container-fluid">
+                <form action="" method="post">
+                    {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="checkout-inner">
+                            <div class="billing-address container">
+                                <h2>Billing Address</h2>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>First Name</label>
+                                        <input class="form-control" value="{{request.user.first_name}}" type="text" placeholder="First Name" name="fname">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                        <input class="form-control" value="{{request.user.last_name}}" type="text" placeholder="Last Name" name="lname">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>E-mail</label>
+                                        <input class="form-control" value="{{request.user.email}}" type="email" placeholder="E-mail" name="email">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Mobile No</label>
+                                        <input class="form-control" value="{{userprofile.mobileno}}" type="text" placeholder="Mobile No" name="mobileno">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Address</label>
+                                        <input class="form-control" value="{{userprofile.address}}" type="text" placeholder="Address" name="address">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Country</label>
+                                          <input class="form-control" value="{{userprofile.country}}" type="text" placeholder="Country" name="country">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>City</label>
+                                        <input class="form-control" value="{{userprofile.city}}" type="text" placeholder="City" name="city">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>State</label>
+                                        <input class="form-control"  value="{{userprofile.state}}" type="text" placeholder="State" name="state">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>ZIP Code</label>
+                                        <input class="form-control"  value="{{userprofile.zipcode}}" type="text" placeholder="ZIP Code" name="zipcode">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="checkout-inner">
+                            <div class="checkout-summary">
+                                <h1>Order Summery</h1>
+                                <hr>
+                        {% if item %}
+                                <table class="table table-stripeds table-bordereds">
+                                    <thead>
+                                        <tr>
+
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        </tr>
+
+                                     </thead>
+                                    <tbody>
+                                    {% for i in item %}
+
+
+                                        <tr>
+                                            <td>
+                                                <img src="{{i.products.image.url}}" height="50px"  width="50px" >
+                                                {{i.products.name}}
+                                            </td>
+                                             <td>{{i.quantity}}</td>
+                                             <td>{{i.products.price}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                     </tbody>
+                                </table>
+                                <p >Grand Total
+                                    <span >Rs{{totalprice}}</span>
+                                </p>
+                                <input type="hidden" value="COD" name="payment_mode">
+                                <div class="checkout-payment">
+                                    <div class="checkout-btn">
+                                        <a href="paypalpage" ><button style="background-color:yellow;color:black;">Place Order</button></a><br><br>
+
+                                        <div id="paypal-button-container"></div>
+
+                                    </div>
+                                </div>
+
+                                {% else %}
+                                  <h5>Your cart is empty</h5>
+                        {% endif %}
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <!-- Checkout End -->
+
+{% endblock %}

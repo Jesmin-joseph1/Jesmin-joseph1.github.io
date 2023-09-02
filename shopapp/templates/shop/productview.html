@@ -1,0 +1,31 @@
+{% extends 'shop/base.html' %}
+{% block title %}Categories{% endblock title %}
+
+{% block product_content %}
+<h1 class="text-center">Product View Page</h1>
+
+<h2 style="color:red;"><b>{{category}}</b></h2>
+<div class="container">
+<!--Product view starts here-->
+
+				<div class="row">
+					{% for p in prods %}
+					<div class="col-lg-4 col-md-6 text-center">
+						<div class="single-product-item">
+							<div class="product-image">
+								<a href="{% url 'productdetailpage' p.name %}">
+								<img src="{{p.image.url}}" style="height:250px;" alt=""></a>
+							</div>
+							<h3>{{p.name}}</h3>
+							<h4 style="color:green;">{{p.price}}</h4>
+							<p>{{p.description}}</p>
+							</a>
+						</div>
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
